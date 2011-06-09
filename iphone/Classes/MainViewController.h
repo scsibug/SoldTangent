@@ -11,10 +11,13 @@
 
 @interface MainViewController : UIViewController <TangentViewControllerDelegate> {
 
+    UISegmentedControl *segCont;
 }
 
+@property (nonatomic, retain) IBOutlet UISegmentedControl *segCont;
 
 - (IBAction)showInfo:(id)sender;
+
 
 @end
 
