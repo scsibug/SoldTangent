@@ -11,6 +11,8 @@
 
 @implementation MainViewController
 
+@synthesize segCont;
+
 /*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
@@ -26,11 +28,27 @@
 
 
 - (IBAction)showInfo:(id)sender {    
+	TangentViewController *controller;
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        controller = [[TangentViewController alloc] initWithNibName:@"TangentView-iPad" bundle:nil];
+    } else {
+        controller = [[TangentViewController alloc] initWithNibName:@"TangentView" bundle:nil];
+    }
 	
-	TangentViewController *controller = [[TangentViewController alloc] initWithNibName:@"TangentView" bundle:nil];
 	controller.delegate = self;
 	
-	controller.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    if ([segCont selectedSegmentIndex] == 0) {
+        controller.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    } else if ([segCont selectedSegmentIndex] == 1) {
+        controller.modalTransitionStyle = UIModalTransitionStylePartialCurl;
+    } else if ([segCont selectedSegmentIndex] == 2) {
+        controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    } else if ([segCont selectedSegmentIndex] == 3) {
+        controller.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    }
+    
+	
 	[self presentModalViewController:controller animated:YES];
 	
 	[controller release];
